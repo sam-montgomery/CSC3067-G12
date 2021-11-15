@@ -32,5 +32,5 @@ function [images, labels] = loadTrainingDataset()
         images(index,:) = reshape(greyImNeg, 1, []);
         labels(index,1) = -1;
     end
-   
+   images = double(images);
 end
