@@ -7,8 +7,6 @@ function [images, labels] = loadTrainingDataset()
         uiwait(warndlg(errorMessage));
     end
 
-   % trainingImagesStore = imageDatastore(imagesFolder,'IncludeSubfolders',true,'LabelSource','foldernames');
-
     %load positive files
     posFilePattern = fullfile(imagesFolder, '\pos\*.jpg'); % Change to whatever pattern you need.
     posFiles = dir(posFilePattern);
