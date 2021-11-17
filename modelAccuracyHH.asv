@@ -1,0 +1,5 @@
+function accuracy = modelAccuracyHH(trainingDataset, testDataset, model)
+    %For half and half accuracy, take half of the training dataset and pass
+    %it in as trainingDataset, train the model based on this, and test it
+    %with testDataset, which should be the other half of the train
+end
