@@ -15,7 +15,7 @@ function accuracy = testMetrics(sampleSize)
             testSet.labels(i,:) = labels(randOrder(index),:);
         end
         
-        accuracy(t) = modelAccuracyHHKNN(trainingSet, testSet, 3);
+        accuracy(t) = modelAccuracyHH_SVM(trainingSet, testSet);
         disp(accuracy(t));
     end
 end
