@@ -5,6 +5,7 @@ clear all;
 close all;
 
 
+
 [images, labels] = loadTrainingDataset();
 testDataset = loadTestDataset();
 
@@ -22,3 +23,4 @@ for i=1:size(images,1)/2
 end
 
 modelAccuracyHH(trainingSet, testSet);
+
