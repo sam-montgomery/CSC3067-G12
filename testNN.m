@@ -2,7 +2,7 @@ function prediction = testNN(testImage, modelNN)
     dEucIndex = 0;
     dEucMin = 1000000;
 
-    for i=1:length(modelNN.neighbours)
+    for i=1:size(modelNN.neighbours,1)
         dEuc = EuclideanDistance(testImage, modelNN.neighbours(i,:));
 
         if(dEuc < dEucMin)
