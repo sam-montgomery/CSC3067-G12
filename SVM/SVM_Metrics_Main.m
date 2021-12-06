@@ -1,12 +1,18 @@
 %TODO
-addpath .\SVM-KM\
+addpath .\SVM-KM
+addpath ..\Full_Image\
+addpath ..\HOG\
 
 clear all;
 close all;
 
 
+%Use Full Image
+%[images, labels] = loadTrainingDataset();
 
-[images, labels] = loadTrainingDataset();
+%Use HOG
+[images, labels] = loadTrainingDatasetHOG();
+
 %testDataset = loadTestDataset();
 iteration = 20;
 

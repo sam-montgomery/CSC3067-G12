@@ -1,5 +1,5 @@
-function [images, labels] = loadTrainingDatasetEE()
-    imagesFolder = 'images';
+function [images, labels] = loadTrainingDataset()
+    imagesFolder = '..\images';
     noOfPosFiles = 0;
 
     if ~isfolder(imagesFolder)
@@ -14,10 +14,8 @@ function [images, labels] = loadTrainingDatasetEE()
     for i=1:length(posFiles)
         fullFileName = fullfile(posFiles(i).folder, posFiles(i).name);
         %pre processing function
-        greyImPos = im2gray(imread(fullFileName));
-        eeIm = edge(greyImPos);
-        images(i,:) = reshape(eeIm, 1, []);
-        images(i,:) = imread(fullFileName);
+        greyImPos = rgb2gray(imread(fullFileName));
+        images(i,:) = reshape(greyImPos, 1, []);
         labels(i,1) = 1;
         noOfPosFiles = i;
     end
@@ -30,9 +28,8 @@ function [images, labels] = loadTrainingDatasetEE()
         fullFileName = fullfile(negFiles(i).folder, negFiles(i).name);
         %pre processing function
         greyImNeg = im2gray(imread(fullFileName));
-        eeIm = edge(greyImNeg);
         index = i + noOfPosFiles;
-        images(index, :) = reshape(eeIm, 1, []);
+        images(index,:) = reshape(greyImNeg, 1, []);
         labels(index,1) = -1;
     end
    images = double(images);

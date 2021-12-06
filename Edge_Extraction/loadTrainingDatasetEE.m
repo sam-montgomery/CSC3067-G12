@@ -1,5 +1,5 @@
-function [images, labels] = loadTrainingDatasetHOG()
-    imagesFolder = 'images';
+function [images, labels] = loadTrainingDatasetEE()
+    imagesFolder = '..\images';
     noOfPosFiles = 0;
 
     if ~isfolder(imagesFolder)
@@ -14,8 +14,10 @@ function [images, labels] = loadTrainingDatasetHOG()
     for i=1:length(posFiles)
         fullFileName = fullfile(posFiles(i).folder, posFiles(i).name);
         %pre processing function
-        posHOG = hog_feature_vector(imread(fullFileName));
-        images(i,:) = posHOG;
+        greyImPos = im2gray(imread(fullFileName));
+        eeIm = edge(greyImPos);
+        images(i,:) = reshape(eeIm, 1, []);
+        images(i,:) = imread(fullFileName);
         labels(i,1) = 1;
         noOfPosFiles = i;
     end
@@ -27,9 +29,10 @@ function [images, labels] = loadTrainingDatasetHOG()
     for i=1:length(negFiles)
         fullFileName = fullfile(negFiles(i).folder, negFiles(i).name);
         %pre processing function
-        negHOG = hog_feature_vector(imread(fullFileName));
+        greyImNeg = im2gray(imread(fullFileName));
+        eeIm = edge(greyImNeg);
         index = i + noOfPosFiles;
-        images(index,:) = reshape(negHOG, 1, []);
+        images(index, :) = reshape(eeIm, 1, []);
         labels(index,1) = -1;
     end
    images = double(images);

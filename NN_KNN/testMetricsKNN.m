@@ -1,4 +1,4 @@
-function [TP, FP, TN, FN] = testHOGMetricsKNN(sampleSize, images, labels)
+function [TP3, FP3, TN3, FN3, TP5, FP5, TN5, FN5, TP10, FP10, TN10, FN10] = testMetricsKNN(sampleSize, images, labels)
 
     %K = 3
     for t=1:3
@@ -15,7 +15,7 @@ function [TP, FP, TN, FN] = testHOGMetricsKNN(sampleSize, images, labels)
             testSet.labels(i,:) = labels(randOrder(index),:);
         end
         
-        [TP(t), FP(t), TN(t), FN(t)] = modelAccuracyHHKNN(trainingSet, testSet, 3);
+        [TP3(t), FP3(t), TN3(t), FN3(t)] = modelAccuracyHHKNN(trainingSet, testSet, 3);
         %disp(accuracy(t));
         %disp(TP(t));
         %disp(FP(t));
@@ -38,7 +38,7 @@ function [TP, FP, TN, FN] = testHOGMetricsKNN(sampleSize, images, labels)
             testSet.labels(i,:) = labels(randOrder(index),:);
         end
         
-        [TP(t), FP(t), TN(t), FN(t)] = modelAccuracyHHKNN(trainingSet, testSet, 5);
+        [TP5(t), FP5(t), TN5(t), FN5(t)] = modelAccuracyHHKNN(trainingSet, testSet, 5);
         %disp(accuracy(t));
         %disp(TP(t));
         %disp(FP(t));
@@ -61,7 +61,7 @@ function [TP, FP, TN, FN] = testHOGMetricsKNN(sampleSize, images, labels)
             testSet.labels(i,:) = labels(randOrder(index),:);
         end
         
-        [TP(t), FP(t), TN(t), FN(t)] = modelAccuracyHHKNN(trainingSet, testSet, 10);
+        [TP10(t), FP10(t), TN10(t), FN10(t)] = modelAccuracyHHKNN(trainingSet, testSet, 10);
         %disp(accuracy(t));
         %disp(TP(t));
         %disp(FP(t));

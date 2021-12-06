@@ -4,7 +4,12 @@ function [TP, FP, TN, FN] = modelAccuracyHHKNN(trainingDataset, testDataset, k)
     %with testDataset, which should be the other half of the original
     %training set 
 
+    %train time
+    tic;
     model = trainNN(trainingDataset.images, trainingDataset.labels);
+    toc;
+
+    %test time
     tic;
     for i=1:size(testDataset.images, 1)
         im = testDataset.images(i,:);
