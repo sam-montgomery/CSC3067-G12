@@ -1,5 +1,8 @@
+%loads dataset of full images ensuring half is positive and half is
+%negative
+
 function [images, labels] = loadTrainingDataset(samplesize)
-    imagesFolder = 'images';
+    imagesFolder = '..\images';
     noOfPosFiles = 0;
 
     if ~isfolder(imagesFolder)
