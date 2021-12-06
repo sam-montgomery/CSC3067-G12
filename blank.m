@@ -1,3 +1,4 @@
 clear all;
 close all;
-%this is a blank script
+
+testMetrics(100);

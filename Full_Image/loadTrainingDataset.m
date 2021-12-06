@@ -1,5 +1,5 @@
-function [images, labels] = loadTrainingDataset()
-    imagesFolder = '..\images';
+function [images, labels] = loadTrainingDataset(samplesize)
+    imagesFolder = 'images';
     noOfPosFiles = 0;
 
     if ~isfolder(imagesFolder)
@@ -11,7 +11,7 @@ function [images, labels] = loadTrainingDataset()
     posFilePattern = fullfile(imagesFolder, '\pos\*.jpg'); % Change to whatever pattern you need.
     posFiles = dir(posFilePattern);
 
-    for i=1:length(posFiles)
+    for i=1:samplesize/2
         fullFileName = fullfile(posFiles(i).folder, posFiles(i).name);
         %pre processing function
         greyImPos = rgb2gray(imread(fullFileName));
@@ -24,7 +24,7 @@ function [images, labels] = loadTrainingDataset()
     negFilePattern = fullfile(imagesFolder, '\neg\*.jpg'); % Change to whatever pattern you need.
     negFiles = dir(negFilePattern);
 
-    for i=1:length(negFiles)
+    for i=1:samplesize/2
         fullFileName = fullfile(negFiles(i).folder, negFiles(i).name);
         %pre processing function
         greyImNeg = im2gray(imread(fullFileName));

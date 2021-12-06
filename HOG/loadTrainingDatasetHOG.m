@@ -1,6 +1,6 @@
-function [images, labels] = loadTrainingDatasetHOG()
+function [images, labels] = loadTrainingDatasetHOG(samplesize)
     %addpath ..\images\
-    imagesFolder = '..\images';
+    imagesFolder = 'images';
     noOfPosFiles = 0;
 
     if ~isfolder(imagesFolder)
@@ -12,7 +12,7 @@ function [images, labels] = loadTrainingDatasetHOG()
     posFilePattern = fullfile(imagesFolder, '\pos\*.jpg'); % Change to whatever pattern you need.
     posFiles = dir(posFilePattern);
 
-    for i=1:length(posFiles)
+    for i=1:samplesize/2
         fullFileName = fullfile(posFiles(i).folder, posFiles(i).name);
         %pre processing function
         posHOG = hog_feature_vector(imread(fullFileName));
@@ -25,7 +25,7 @@ function [images, labels] = loadTrainingDatasetHOG()
     negFilePattern = fullfile(imagesFolder, '\neg\*.jpg'); % Change to whatever pattern you need.
     negFiles = dir(negFilePattern);
 
-    for i=1:length(negFiles)
+    for i=1:samplesize/2
         fullFileName = fullfile(negFiles(i).folder, negFiles(i).name);
         %pre processing function
         negHOG = hog_feature_vector(imread(fullFileName));

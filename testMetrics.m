@@ -1,5 +1,5 @@
 function accuracy = testMetrics(sampleSize)
-    [images, labels] = loadTrainingDataset();
+    [images, labels] = loadTrainingDataset(100);
     
     for t=1:3
     randOrder = randperm(size(images,1));
