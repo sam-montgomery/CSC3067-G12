@@ -13,9 +13,11 @@ function [images, labels] = loadTrainingDataset(samplesize)
     %load positive files
     posFilePattern = fullfile(imagesFolder, '\pos\*.jpg'); % Change to whatever pattern you need.
     posFiles = dir(posFilePattern);
+    
+    randI = randi(size(posFiles, 1), 1, samplesize);
 
     for i=1:samplesize/2
-        fullFileName = fullfile(posFiles(i).folder, posFiles(i).name);
+        fullFileName = fullfile(posFiles(randI(i)).folder, posFiles(randI(i)).name);
         %pre processing function
         greyImPos = rgb2gray(imread(fullFileName));
         images(i,:) = reshape(greyImPos, 1, []);
@@ -27,8 +29,9 @@ function [images, labels] = loadTrainingDataset(samplesize)
     negFilePattern = fullfile(imagesFolder, '\neg\*.jpg'); % Change to whatever pattern you need.
     negFiles = dir(negFilePattern);
 
+    randI = randi(size(negFiles, 1), 1, samplesize);
     for i=1:samplesize/2
-        fullFileName = fullfile(negFiles(i).folder, negFiles(i).name);
+        fullFileName = fullfile(negFiles(randI(i)).folder, negFiles(randI(i)).name);
         %pre processing function
         greyImNeg = im2gray(imread(fullFileName));
         index = i + noOfPosFiles;
