@@ -11,8 +11,9 @@ function [images, labels] = loadTrainingDatasetEE(samplesize)
     posFilePattern = fullfile(imagesFolder, '\pos\*.jpg'); % Change to whatever pattern you need.
     posFiles = dir(posFilePattern);
 
+    randI = randi(size(posFiles, 1), 1, samplesize);
     for i=1:samplesize/2
-        fullFileName = fullfile(posFiles(i).folder, posFiles(i).name);
+        fullFileName = fullfile(posFiles(randI(i)).folder, posFiles(randI(i)).name);
         %pre processing function
         greyImPos = im2gray(imread(fullFileName));
         eeIm = edge(greyImPos);
@@ -26,8 +27,9 @@ function [images, labels] = loadTrainingDatasetEE(samplesize)
     negFilePattern = fullfile(imagesFolder, '\neg\*.jpg'); % Change to whatever pattern you need.
     negFiles = dir(negFilePattern);
 
+    randI = randi(size(negFiles, 1), 1, samplesize);
     for i=1:samplesize/2
-        fullFileName = fullfile(negFiles(i).folder, negFiles(i).name);
+        fullFileName = fullfile(negFiles(randI(i)).folder, negFiles(randI(i)).name);
         %pre processing function
         greyImNeg = im2gray(imread(fullFileName));
         eeIm = edge(greyImNeg);
