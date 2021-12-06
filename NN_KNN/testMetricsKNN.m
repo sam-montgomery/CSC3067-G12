@@ -2,11 +2,19 @@ function [TP3, FP3, TN3, FN3, TP5, FP5, TN5, FN5, TP10, FP10, TN10, FN10] = test
 
     %K = 3
     for t=1:3
-        for i=1:size(images,1)/2
-            testSet.images = images(size(images,1)/2 - i)
-            
-
+        index = 1;
+        for i=1:2:size(images,1)
+            testSet.images(index,:) = images(i,:);
+            testSet.labels(index,:) = labels(i,:);
+            index = index+1;
         end
+        index = 1;
+        for i=2:2:size(images,1)
+            trainingSet.images(index, :) = images(i,:);
+            trainingSet.labels(index, :) = labels(i,:);
+            index = index + 1;
+        end
+
         [TP3(t), FP3(t), TN3(t), FN3(t)] = modelAccuracyHHKNN(trainingSet, testSet, 3);
         %disp(accuracy(t));
         %disp(TP(t));
