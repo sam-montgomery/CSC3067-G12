@@ -7,9 +7,6 @@ function testDataset = loadTestDataset()
     
     noOfTests = fscanf(fp, '%d', 1);
 
-    testDataset.images = [];
-    testDataset.noOfPedestrians = [];
-
     for i=1:noOfTests
     
         imageName = fscanf(fp,'%s',1);
@@ -25,7 +22,7 @@ function testDataset = loadTestDataset()
         [fPath, fName, fExt] = fileparts(imageName);
         imgLocation = "pedestrian/" + fName + fExt;
         greyIm = rgb2gray(imread(imgLocation));
-        testDataset.images(i,:) = reshape(greyIm, 1, []);
+        testDataset.images{i} = greyIm;
         testDataset.noOfPedestrians(i,:) = noOfPedestrians;
     end
 
