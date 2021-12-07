@@ -2,7 +2,7 @@
 %negative
 
 function [images, labels] = loadTrainingDataset(samplesize)
-    imagesFolder = 'images';
+    imagesFolder = '..\images';
     noOfPosFiles = 0;
 
     if ~isfolder(imagesFolder)
