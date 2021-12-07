@@ -10,10 +10,17 @@ if max(labels)<2
     labels(labels==0)=-1;
 
     %Initilaise and setup SVM parameters
+<<<<<<< HEAD
     lambda = 1e+19;  
     C = Inf;
     sigmakernel=10;
     K=svmkernel(images,'poly',sigmakernel); 
+=======
+    lambda = 1e+15;  
+    C = Inf;
+    sigmakernel=10;
+    K=svmkernel(images,'polyhomog',sigmakernel); 
+>>>>>>> 4ae29303eb813b767e658bda1d80fc19720ec287
     kerneloption.matrix=K;
 	kernel='numerical';
   

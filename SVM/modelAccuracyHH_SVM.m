@@ -8,6 +8,7 @@ function [TP, FP, TN, FN] = modelAccuracyHH_SVM(trainingDataset, testDataset)
     tic;
     model = SVMtraining(trainingDataset.images, trainingDataset.labels);
     toc;
+
     tic;
     for i=1:size(testDataset.images, 1)
         im = testDataset.images(i,:);
@@ -20,7 +21,8 @@ function [TP, FP, TN, FN] = modelAccuracyHH_SVM(trainingDataset, testDataset)
     TN = 0;
     FN = 0;
 
-    for i =1:size(testDataset.images, 1)
+    for i =1:size(classificationResult)
+
         if(testDataset.labels(i) == 1 && classificationResult(i) == 1)
             TP = TP + 1;
         end
@@ -35,4 +37,6 @@ function [TP, FP, TN, FN] = modelAccuracyHH_SVM(trainingDataset, testDataset)
         end
     end
     
+    %comparison = (testDataset.labels==classificationResult);
+
 end
