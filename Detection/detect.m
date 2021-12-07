@@ -4,7 +4,7 @@ function rects = detect(im, model, windowSize)
     %Pedestrian img size 480 x 640
     image = cell2mat(im);
     windowCount = 1;
-
+    rects = [];
     for y=1:windowSize(1):size(image,1)
         for x=1:windowSize(2):size(image,2)
             windowpos = [x,y,windowSize(2)-1,windowSize(1)-1];
@@ -12,19 +12,18 @@ function rects = detect(im, model, windowSize)
             boxPos{windowCount} = [x,y]; 
             window = double(imcrop(image, windowpos));
             window = imresize(window, [160, 96]);
-            imshow(window);
             windowHog = hog_feature_vector(window);
             hogFeat(windowCount, :) = windowHog;
             windowCount = windowCount + 1;
         end
     end
+    index = 1;
     for i=1:windowCount-1
         %pred(i) = testKNN(hogFeat(i,:), model, 5);
         pred(i) = testSVM(hogFeat(i,:), model);
         if(pred(i) == 1)
-            bBox = cell2mat(boxPos(i));
-            rect = rectangle('Position',[bBox(1),bBox(2),windowSize(2),windowSize(1)],'LineWidth',1, 'EdgeColor','r');
-            rects(i,:) = rect;
+            rects(index, :) = cell2mat(boxPos(i));
+            index = index+1;
         end
     end
    
