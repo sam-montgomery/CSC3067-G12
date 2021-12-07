@@ -1,11 +1,12 @@
 clear all;
 close all;
 
-[images, labels] = loadTrainingDatasetHOG(2000);
+[trainingSet.images, trainingSet.labels] = loadTrainingDatasetHOG(1900);
+
+SVMModel = SVMtraining(trainingSet.images, trainingSet.labels);
+
+%modelNN = trainNN(trainingImages, trainingLabels);
 
 testDataset = loadTestDataset();
-
-SVMModel = SVMtraining(images, labels);
-%modelNN = trainNN(trainingImages, trainingLabels);
-image = testDataset.images(1,10);
-detect(image, SVMModel);
+image = testDataset.images(1,1);
+scalingDetector(image, SVMModel);

@@ -1,7 +1,7 @@
 %loads dataset of full images ensuring half is positive and half is
 %negative
 
-function [images, labels] = loadTrainingDataset(samplesize)
+function [images, labels] = loadLSdataset(samplesize)
     imagesFolder = '..\images';
     noOfPosFiles = 0;
 
@@ -20,7 +20,9 @@ function [images, labels] = loadTrainingDataset(samplesize)
         fullFileName = fullfile(posFiles(randI(i)).folder, posFiles(randI(i)).name);
         %pre processing function
         greyImPos = rgb2gray(imread(fullFileName));
-        images(i,:) = reshape(greyImPos, 1, []);
+        lsImage = enhanceContrastALS(greyImPos);
+        beImage = enhanceBrightness(lsImage, 100);
+        images(i,:) = reshape(beImage, 1, []);
         labels(i,1) = 1;
         noOfPosFiles = i;
     end
@@ -34,8 +36,10 @@ function [images, labels] = loadTrainingDataset(samplesize)
         fullFileName = fullfile(negFiles(randI(i)).folder, negFiles(randI(i)).name);
         %pre processing function
         greyImNeg = im2gray(imread(fullFileName));
+        lsImage = enhanceContrastALS(greyImNeg);
+        beImage = enhanceBrightness(lsImage, 50);
         index = i + noOfPosFiles;
-        images(index,:) = reshape(greyImNeg, 1, []);
+        images(index,:) = reshape(beImage, 1, []);
         labels(index,1) = -1;
     end
    images = double(images);

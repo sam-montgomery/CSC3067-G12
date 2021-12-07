@@ -1,16 +1,16 @@
 function accuracy = testHOGMetricsSVM(sampleSize, images, labels)  
     for t=1:3
-    randOrder = randperm(size(images,1));
-        for i=1:sampleSize
-            trainingSet.images(i,:) = images(randOrder(i),:);
-            trainingSet.labels(i,:) = labels(randOrder(i),:);
+        index = 1;
+        for i=1:2:sampleSize
+            trainingSet.images(index,:) = images(i,:);
+            trainingSet.labels(index,:) = labels(i,:);
+            index = index + 1;
         end
-        
-        for i=1:sampleSize
-            index = size(images,1)/2 + i;
-            index = int64(index) - 1;
-            testSet.images(i,:) = images(randOrder(index),:);
-            testSet.labels(i,:) = labels(randOrder(index),:);
+        index = 1;
+        for i=2:2:sampleSize
+            testSet.images(index,:) = images(i,:);
+            testSet.labels(index,:) = labels(i,:);
+            index = index+1;
         end
         
         accuracy(t) = modelAccuracyHH_SVM(trainingSet, testSet);

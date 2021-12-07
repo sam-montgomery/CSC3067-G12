@@ -22,6 +22,7 @@ function [TP, FP, TN, FN] = modelAccuracyHH_SVM(trainingDataset, testDataset)
     FN = 0;
 
     for i =1:size(classificationResult)
+
         if(testDataset.labels(i) == 1 && classificationResult(i) == 1)
             TP = TP + 1;
         end
@@ -37,4 +38,5 @@ function [TP, FP, TN, FN] = modelAccuracyHH_SVM(trainingDataset, testDataset)
     end
     
     %comparison = (testDataset.labels==classificationResult);
+
 end
