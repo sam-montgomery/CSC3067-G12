@@ -10,10 +10,10 @@ if max(labels)<2
     labels(labels==0)=-1;
 
     %Initilaise and setup SVM parameters
-    lambda = 1e-4;  
+    lambda = 1e+19;  
     C = Inf;
     sigmakernel=10;
-    K=svmkernel(images,'gaussian',sigmakernel); 
+    K=svmkernel(images,'poly',sigmakernel); 
     kerneloption.matrix=K;
 	kernel='numerical';
   
