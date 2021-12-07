@@ -10,7 +10,7 @@ if max(labels)<2
     labels(labels==0)=-1;
 
     %Initilaise and setup SVM parameters
-    lambda = 1e-20;  
+    lambda = 1e-4;  
     C = Inf;
     sigmakernel=10;
     K=svmkernel(images,'gaussian',sigmakernel); 
