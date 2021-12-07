@@ -5,7 +5,9 @@ function [TP, FP, TN, FN] = modelAccuracyHH_SVM(trainingDataset, testDataset)
     %training set 
 
     %train SVM Model
+    tic;
     model = SVMtraining(trainingDataset.images, trainingDataset.labels);
+    toc;
     tic;
     for i=1:size(testDataset.images, 1)
         im = testDataset.images(i,:);

@@ -8,7 +8,7 @@ clear all;
 close all;
 
 %Use HOG
-[trainingSet, testingSet] = loadFullImageDataset(1500);
+[trainingSet, testingSet] = loadFullImageDataset(500);
 
 %SVMModel = trainSVM(trainingSet.images, trainingSet.labels);
 [TP, FP, TN, FN] = modelAccuracyHH_SVM(trainingSet, testingSet);
