@@ -21,7 +21,7 @@ function [images, labels] = loadLSdataset(samplesize)
         %pre processing function
         greyImPos = rgb2gray(imread(fullFileName));
         lsImage = enhanceContrastALS(greyImPos);
-        beImage = enhanceBrightness(lsImage, 50);
+        beImage = enhanceBrightness(lsImage, 100);
         images(i,:) = reshape(beImage, 1, []);
         labels(i,1) = 1;
         noOfPosFiles = i;
