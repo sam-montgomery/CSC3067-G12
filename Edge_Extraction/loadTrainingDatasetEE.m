@@ -18,7 +18,6 @@ function [images, labels] = loadTrainingDatasetEE(samplesize)
         greyImPos = im2gray(imread(fullFileName));
         eeIm = edge(greyImPos);
         images(i,:) = reshape(eeIm, 1, []);
-        images(i,:) = imread(fullFileName);
         labels(i,1) = 1;
         noOfPosFiles = i;
     end
