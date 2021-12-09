@@ -20,14 +20,14 @@ function [images, labels] = loadLSdataset(samplesize)
         fullFileName = fullfile(posFiles(randI(i)).folder, posFiles(randI(i)).name);
         %pre processing function
         greyImPos = rgb2gray(imread(fullFileName));
-        ceImage = enhanceContrastPL(greyImPos, 0.04);
-        %ceImage = adapthisteq(greyImPos);
-        %ceImage = imadjust(greyImPos);
-        %ceImage = histeq(greyImPos);
-        %ceImage = enhanceContrastALS(imH);
-        %beImage = enhanceBrightness(greyImPos, 125);
-        ceImage = hog_feature_vector(ceImage);
-        images(i,:) = reshape(ceImage, 1, []);
+
+        %CE + BE + HOG
+        cebeImage = enhanceBrightness(greyImPos, 125);
+        cebeImage = enhanceContrastPL(cebeImage, 0.04);
+        cebeImage = hog_feature_vector(cebeImage);
+
+        
+        images(i,:) = reshape(beImage, 1, []);
         labels(i,1) = 1;
         noOfPosFiles = i;
     end
@@ -41,15 +41,14 @@ function [images, labels] = loadLSdataset(samplesize)
         fullFileName = fullfile(negFiles(randI(i)).folder, negFiles(randI(i)).name);
         %pre processing function
         greyImNeg = im2gray(imread(fullFileName));
-        ceImage = enhanceContrastPL(greyImNeg, 0.04);
-        %ceImage = adapthisteq(greyImNeg);
-        %ceImage = imadjust(greyImNeg);
-        %ceImage = histeq(greyImNeg);
-        %ceImage = enhanceContrastALS(imH);
-        %beImage = enhanceBrightness(greyImNeg, 125);
-        ceImage = hog_feature_vector(ceImage);
+
+        %CE + BE + HOG
+        cebeImage = enhanceBrightness(greyImNeg, 125);
+        cebeImage = enhanceContrastPL(cebeImage, 0.04);
+        cebeImage = hog_feature_vector(cebeImage);
+
         index = i + noOfPosFiles;
-        images(index,:) = reshape(ceImage, 1, []);
+        images(index,:) = reshape(cebeImage, 1, []);
         labels(index,1) = -1;
     end
    images = double(images);

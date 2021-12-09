@@ -11,7 +11,7 @@ close all;
 
 %Use HOG
 %[trainingSet, testingSet] = loadHOGDataset(300);
-sampleSize = 100;
+sampleSize = 1500;
 
 %Use Full Image
 %[trainingSet, testingSet] = loadHOGDataset(sampleSize);
