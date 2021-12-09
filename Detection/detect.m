@@ -1,12 +1,12 @@
-function rects = detect(im, model, windowSize)
+function rects = detect(im, model, windowSize, windowinterval)
     %Window size 80 x 160 
     %windowSize = [160, 80];
     %Pedestrian img size 480 x 640
     image = cell2mat(im);
     windowCount = 1;
     rects = [];
-    for y=1:windowSize(1):size(image,1)
-        for x=1:windowSize(2):size(image,2)
+    for y=1:windowSize(1)/windowinterval:size(image,1)
+        for x=1:windowSize(2)/windowinterval:size(image,2)
             windowpos = [x,y,windowSize(2)-1,windowSize(1)-1];
             window = 0; 
             boxPos{windowCount} = [x,y]; 
@@ -21,8 +21,11 @@ function rects = detect(im, model, windowSize)
     for i=1:windowCount-1
         %pred(i) = testKNN(hogFeat(i,:), model, 5);
         pred(i) = testSVM(hogFeat(i,:), model);
-        if(pred(i) == 1)
-            rects(index, :) = cell2mat(boxPos(i));
+        if(pred(i) > 0.5)
+            xy = cell2mat(boxPos(i));
+            bBox = [xy(1) xy(2) windowSize(2) windowSize(1)];
+            rects.box(index, :) = bBox;
+            rects.pred(index, :) = pred(i);
             index = index+1;
         end
     end

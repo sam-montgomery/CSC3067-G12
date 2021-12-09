@@ -13,7 +13,7 @@ if max(labels)<2
     lambda = 1e-2;  
     C = Inf;
     sigmakernel=10;
-    K=svmkernel(images,'gaussian',sigmakernel);
+    K=svmkernel(images,'gaussian',sigmakernel); 
     kerneloption.matrix=K;
 	kernel='numerical';
   

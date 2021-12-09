@@ -1,6 +1,6 @@
 function [images, labels] = loadTrainingDatasetHOG(samplesize)
     %addpath ..\images\
-    imagesFolder = '..\images';
+     imagesFolder = 'images';
     noOfPosFiles = 0;
 
     if ~isfolder(imagesFolder)

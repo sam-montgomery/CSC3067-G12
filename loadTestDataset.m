@@ -14,11 +14,11 @@ function testDataset = loadTestDataset()
         BBs = [];
         for j=1:noOfPedestrians
             for k=1:4
-                BBs(k) = fscanf(fp, '%f', 1); 
+                BBs(j, k) = fscanf(fp, '%f', 1); 
             end
             fscanf(fp, '%f', 1); 
-            testDataset.BBs(i,:) = BBs;
         end
+        testDataset.BBs{i} = BBs;
         [fPath, fName, fExt] = fileparts(imageName);
         imgLocation = "pedestrian/" + fName + fExt;
         greyIm = rgb2gray(imread(imgLocation));

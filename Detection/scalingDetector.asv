@@ -1,18 +1,18 @@
 function scalingDetector(im, model)
-    lrgRects = detect(im, model, [240, 120],4);
-    medRects = detect(im, model, [200, 100],8);
-    nrmRects = detect(im, model, [160, 80],4);
-    ssRects = detect(im, model, [120, 60],3);
-    smlRects = detect(im, model, [80, 40],2);
-    xsmlRects = detect(im, model, [40, 20], 2);
+    lrgRects = detect(im, model, [240, 120],3);
+    medRects = detect(im, model, [200, 100],4);
+    nrmRects = detect(im, model, [160, 80],2);
+    ssRects = detect(im, model, [120, 60],1);
+    smlRects = detect(im, model, [80, 40],1);
+    xsmlRects = detect(im, model, [40, 20], 1);
     image = cell2mat(im);
     combined.box = vertcat(lrgRects.box,medRects.box,nrmRects.box,ssRects.box,smlRects.box,xsmlRects.box);
-    combined.pred = vertcat(lrgRects.pred,medRects.pred,nrmRects.pred,ssRects.pred,smlRects.pred,xsmlRects.pred);
-    [nmsBoxes, boxScore] = selectStrongestBbox(combined.box, combined.pred, 'OverlapThreshold', 0.1);
+    combined.box = vertcat(lrgRects.box,medRects.box,nrmRects.box,ssRects.box,smlRects.box,xsmlRects);
+    [nmsBoxes, boxScore] = selectStrongestBbox(combined.box, combined.pred, 'OverlapThreshold', 0.3);
     imshow(image);
     hold on
-        for i=1:size(nmsBoxes,1)
-            rectangle('Position',[nmsBoxes(i, 1),nmsBoxes(i, 2),nmsBoxes(i, 3),nmsBoxes(i, 4)],'LineWidth',1, 'EdgeColor','r');
+        for i=1:size(lrgRects,1)
+            rectangle('Position',[lrgRects(i, 1),lrgRects(i, 2),120,240],'LineWidth',1, 'EdgeColor','r');
         end
 %         for i=1:size(medRects,1)
 %             rectangle('Position',[medRects(i, 1),medRects(i, 2),100,200],'LineWidth',1, 'EdgeColor','b');

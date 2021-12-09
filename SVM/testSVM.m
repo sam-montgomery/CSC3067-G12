@@ -1,4 +1,4 @@
-function [prediction maxi]= testSVM(image,model)
+function [pred maxi]= testSVM(image,model)
 
 if strcmp(model.type,'binary')
     
